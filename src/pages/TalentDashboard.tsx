@@ -54,49 +54,57 @@ const TalentDashboard = () => {
 
       {/* Right Column - Invitations */}
       <main className="flex-1 p-12">
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="max-w-5xl mx-auto space-y-8">
           <h1 className="text-5xl md:text-6xl font-serif font-bold text-foreground tracking-tight leading-tight">
             You're in demand. New invitations are waiting.
           </h1>
 
-          {/* Invitation Card Stack */}
-          <div className="relative h-[500px] flex items-center justify-center">
-            {/* Ghosted cards behind */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Card className="absolute w-[380px] h-[420px] rotate-[-3deg] translate-y-4 opacity-30 blur-sm bg-card/50" />
-              <Card className="absolute w-[380px] h-[420px] rotate-[2deg] translate-y-2 opacity-50 blur-[2px] bg-card/70" />
-            </div>
-
-            {/* Main invitation card */}
-            <Card className="relative w-[400px] h-[440px] shadow-2xl bg-card border-2 z-10">
-              <CardContent className="p-8 h-full flex flex-col justify-between">
-                {/* Company Logo & Name */}
-                <div className="text-center space-y-3">
-                  <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-primary/60 rounded-2xl flex items-center justify-center shadow-lg">
-                    <Briefcase className="w-10 h-10 text-primary-foreground" />
+          {/* Invitation List */}
+          <div className="space-y-4">
+            {/* Invitation Item */}
+            <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-6">
+                  {/* Left: Logo & Company */}
+                  <div className="flex items-center gap-4 min-w-[240px]">
+                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-8 h-8 text-primary-foreground" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground text-lg">Neural Dynamics Inc.</h3>
+                    </div>
                   </div>
-                  <h2 className="text-xl font-semibold text-foreground">Neural Dynamics Inc.</h2>
-                </div>
 
-                {/* Role Name */}
-                <div className="text-center">
-                  <h3 className="text-3xl font-serif font-bold text-foreground mb-6">
-                    AI Research Intern
-                  </h3>
-                  
-                  {/* Key Details */}
-                  <div className="space-y-2 text-muted-foreground">
-                    <p className="text-lg">📍 Helsinki / Remote</p>
-                    <p className="text-lg">📅 June - Aug 2026</p>
+                  {/* Middle: Role & Details */}
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-serif font-bold text-foreground mb-2">
+                      AI Research Intern
+                    </h2>
+                    <div className="flex gap-4 text-muted-foreground">
+                      <span>📍 Helsinki / Remote</span>
+                      <span>📅 June - Aug 2026</span>
+                    </div>
+                  </div>
+
+                  {/* Right: Action Buttons */}
+                  <div className="flex gap-3 flex-shrink-0">
+                    <Button 
+                      variant="outline" 
+                      className="border-border hover:bg-muted"
+                    >
+                      Reject
+                    </Button>
+                    <Button 
+                      className="bg-[#84cc16] hover:bg-[#65a30d] text-white"
+                    >
+                      Accept
+                    </Button>
                   </div>
                 </div>
-
-                {/* See More Button */}
-                <Button variant="outline" className="w-full">
-                  See More Details
-                </Button>
               </CardContent>
             </Card>
+
+            {/* Additional invitation items can be added here */}
           </div>
         </div>
       </main>
