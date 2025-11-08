@@ -14,7 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      postings: {
+        Row: {
+          about: string | null
+          company: string
+          created_at: string
+          description: string | null
+          id: string
+          location: string | null
+          qualifications: string | null
+          responsibilities: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          about?: string | null
+          company: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          qualifications?: string | null
+          responsibilities?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          about?: string | null
+          company?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          qualifications?: string | null
+          responsibilities?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          education: string | null
+          experience: string | null
+          extracurriculars: string | null
+          id: string
+          name: string
+          preferences: string | null
+          profile: string | null
+          skills: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          education?: string | null
+          experience?: string | null
+          extracurriculars?: string | null
+          id?: string
+          name: string
+          preferences?: string | null
+          profile?: string | null
+          skills?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          education?: string | null
+          experience?: string | null
+          extracurriculars?: string | null
+          id?: string
+          name?: string
+          preferences?: string | null
+          profile?: string | null
+          skills?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
