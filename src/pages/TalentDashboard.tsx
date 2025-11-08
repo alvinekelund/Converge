@@ -9,7 +9,7 @@ const TalentDashboard = () => {
   return (
     <div className="min-h-screen bg-white flex">
       {/* Left Column - Agent Sidebar */}
-      <aside className="w-80 border-r border-border p-8 space-y-8">
+      <aside className="w-80 border-r border-border p-8 space-y-8" style={{ backgroundColor: '#E8E8E8' }}>
         <h2 className="text-3xl font-serif font-bold text-foreground">
           Your Agent is Ready
         </h2>
@@ -52,6 +52,14 @@ const TalentDashboard = () => {
               </p>
             </Card>
           </button>
+
+          {/* Upgrade Button */}
+          <Button
+            onClick={() => navigate("/candidate")}
+            className="w-full bg-black text-white hover:bg-black/90 rounded-lg py-6"
+          >
+            Upgrade your agent
+          </Button>
         </div>
       </aside>
 
