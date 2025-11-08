@@ -3,13 +3,24 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ArrowLeft, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
+interface MatchResult {
+  posting_file: string;
+  mutual_matches: string[];
+  verdict: string;
+}
+
 const Admin = () => {
   const [isProcessing, setIsProcessing] = useState(false);
-  const [mutualMatches, setMutualMatches] = useState<any[]>([]);
+  const [matchResults, setMatchResults] = useState<MatchResult[]>([]);
   const { toast } = useToast();
+
+  const removeExtension = (filename: string) => {
+    return filename.replace(/\.txt$/, '').replace(/_\d+$/, '');
+  };
 
   const handleStartProcess = async () => {
     setIsProcessing(true);
@@ -67,14 +78,18 @@ const Admin = () => {
 
       const result = await response.json();
       
-      // Store mutual matches
-      if (result.mutual_matches) {
-        setMutualMatches(result.mutual_matches);
+      // Store match results
+      if (Array.isArray(result)) {
+        setMatchResults(result);
       }
+      
+      const totalMatches = result.reduce((sum: number, item: MatchResult) => 
+        sum + (item.mutual_matches?.length || 0), 0
+      );
       
       toast({
         title: "Success!",
-        description: `Matchmaking completed! Found ${result.mutual_matches?.length || 0} mutual matches.`,
+        description: `Matchmaking completed! Found ${totalMatches} mutual matches across ${result.length} postings.`,
       });
 
       console.log("Matchmaking results:", result);
@@ -138,60 +153,48 @@ const Admin = () => {
           </CardContent>
         </Card>
 
-        {mutualMatches.length > 0 && (
+        {matchResults.length > 0 && (
           <Card>
             <CardHeader>
               <CardTitle>Mutual Matches</CardTitle>
               <CardDescription>
-                {mutualMatches.length} mutual match{mutualMatches.length !== 1 ? 'es' : ''} found
+                Results from {matchResults.length} posting{matchResults.length !== 1 ? 's' : ''}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {mutualMatches.map((match, index) => (
-                  <div 
-                    key={index}
-                    className="bg-muted/50 rounded-lg p-4 space-y-2 hover:bg-muted/70 transition-colors"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 space-y-1">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-foreground">
-                            {match.candidate_name || match.profile_name || `Candidate ${match.profile_id || index + 1}`}
-                          </span>
-                          <span className="text-muted-foreground">×</span>
-                          <span className="font-semibold text-foreground">
-                            {match.job_title || match.posting_title || `Job ${match.posting_id || index + 1}`}
-                          </span>
-                        </div>
-                        {match.company && (
-                          <p className="text-sm text-muted-foreground">
-                            {match.company}
-                          </p>
-                        )}
-                        {match.match_score && (
-                          <div className="flex items-center gap-2 mt-2">
-                            <div className="flex-1 bg-background rounded-full h-2">
-                              <div 
-                                className="bg-primary h-2 rounded-full transition-all"
-                                style={{ width: `${Math.min(match.match_score, 100)}%` }}
-                              />
-                            </div>
-                            <span className="text-xs font-medium text-muted-foreground min-w-[3rem] text-right">
-                              {typeof match.match_score === 'number' ? match.match_score.toFixed(0) : match.match_score}%
-                            </span>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Posting</TableHead>
+                    <TableHead>Mutual Matches</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {matchResults.map((result, index) => (
+                    <TableRow key={index}>
+                      <TableCell className="font-medium">
+                        {removeExtension(result.posting_file)}
+                      </TableCell>
+                      <TableCell>
+                        {result.mutual_matches && result.mutual_matches.length > 0 ? (
+                          <div className="flex flex-wrap gap-2">
+                            {result.mutual_matches.map((match, matchIndex) => (
+                              <span 
+                                key={matchIndex}
+                                className="bg-primary/10 text-primary px-2 py-1 rounded text-sm"
+                              >
+                                {removeExtension(match)}
+                              </span>
+                            ))}
                           </div>
+                        ) : (
+                          <span className="text-muted-foreground text-sm">No matches</span>
                         )}
-                      </div>
-                    </div>
-                    {match.reason && (
-                      <p className="text-sm text-muted-foreground mt-2">
-                        {match.reason}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
             </CardContent>
           </Card>
         )}
