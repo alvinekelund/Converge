@@ -9,9 +9,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import ChatInterface from "@/components/ChatInterface";
 
 const Candidate = () => {
   const [showWelcome, setShowWelcome] = useState(true);
+  const [showChat, setShowChat] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -109,6 +111,11 @@ const Candidate = () => {
     }
   };
 
+  // Show chat interface if activated
+  if (showChat) {
+    return <ChatInterface />;
+  }
+
   return (
     <>
       <Dialog open={showWelcome} onOpenChange={setShowWelcome}>
@@ -128,7 +135,10 @@ const Candidate = () => {
             
             <div className="pt-8">
               <Button
-                onClick={() => setShowWelcome(false)}
+                onClick={() => {
+                  setShowWelcome(false);
+                  setShowChat(true);
+                }}
                 size="lg"
                 className="px-12 py-6 text-lg font-medium bg-primary text-primary-foreground shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)] hover:shadow-[0_0_60px_rgba(var(--primary-rgb),0.7)] transition-all duration-300 animate-pulse-glow"
               >
