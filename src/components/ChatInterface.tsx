@@ -132,7 +132,7 @@ const ChatInterface = () => {
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
                 <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
-                  <p className={`font-bold text-center ${selectedCategory ? 'text-base' : 'text-lg'} break-words max-w-full px-2`}>
+                  <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full px-2 ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
                     {category}
                   </p>
                 </div>
