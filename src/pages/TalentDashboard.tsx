@@ -64,9 +64,9 @@ const TalentDashboard = () => {
       </aside>
 
       {/* Right Column - Invitations */}
-      <main className="flex-1 p-12">
-        <div className="max-w-5xl mx-auto space-y-8">
-          <h1 className="text-5xl md:text-6xl font-serif font-bold text-foreground tracking-tight leading-tight">
+      <main className="flex-1 flex items-center justify-center p-12">
+        <div className="max-w-4xl w-full space-y-6">
+          <h1 className="text-3xl font-serif font-bold text-foreground tracking-tight leading-tight">
             You're in demand. New invitations are waiting.
           </h1>
 
@@ -74,24 +74,24 @@ const TalentDashboard = () => {
           <div className="space-y-4">
             {/* Invitation Item */}
             <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
-              <CardContent className="p-6">
+              <CardContent className="p-5">
                 <div className="flex items-center gap-6">
                   {/* Left: Logo & Company */}
-                  <div className="flex items-center gap-4 min-w-[240px]">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Briefcase className="w-8 h-8 text-primary-foreground" />
+                  <div className="flex items-center gap-3 min-w-[200px]">
+                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center flex-shrink-0">
+                      <Briefcase className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-foreground text-lg">Neural Dynamics Inc.</h3>
+                      <h3 className="font-semibold text-foreground text-sm">Neural Dynamics Inc.</h3>
                     </div>
                   </div>
 
                   {/* Middle: Role & Details */}
                   <div className="flex-1">
-                    <h2 className="text-2xl font-serif font-bold text-foreground mb-2">
+                    <h2 className="text-lg font-serif font-bold text-foreground mb-1">
                       AI Research Intern
                     </h2>
-                    <div className="flex gap-4 text-muted-foreground">
+                    <div className="flex gap-4 text-sm text-muted-foreground">
                       <span>📍 Helsinki / Remote</span>
                       <span>📅 June - Aug 2026</span>
                     </div>
@@ -101,12 +101,12 @@ const TalentDashboard = () => {
                   <div className="flex gap-3 flex-shrink-0">
                     <Button 
                       variant="outline" 
-                      className="border-border hover:bg-muted"
+                      className="border-border hover:bg-muted text-sm h-9 px-4"
                     >
                       Reject
                     </Button>
                     <Button 
-                      className="text-black hover:opacity-90"
+                      className="text-black hover:opacity-90 text-sm h-9 px-4"
                       style={{ backgroundColor: '#D4FF5E' }}
                     >
                       Accept
