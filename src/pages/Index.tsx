@@ -19,9 +19,9 @@ const Index = () => {
       <div className="relative z-10 text-center space-y-6">
         <div className="space-y-2">
           <h1 className="text-5xl font-bold tracking-tight text-foreground animate-float">
-            Agentic Hack 2025
+            Converge
           </h1>
-          <p className="text-lg text-muted-foreground">Ready to build</p>
+          <p className="text-lg text-muted-foreground">Talent, intuitively</p>
         </div>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
