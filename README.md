@@ -4,6 +4,8 @@
 
 **URL**: https://lovable.dev/projects/f1f7acc9-5254-4e73-a534-2ee429e05ef7
 
+Pitch video in hackathon: https://drive.google.com/file/d/1RDG1BaET2TGqUR8dHHvm5Yai5lCuvzUK/view?usp=sharing
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
