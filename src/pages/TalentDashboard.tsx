@@ -71,14 +71,14 @@ const TalentDashboard = () => {
           </h1>
 
           {/* Invitation List */}
-          <div className="space-y-4">
-            {/* Invitation Item */}
+          <div className="space-y-5">
+            {/* Card 1: AI Research */}
             <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-5">
                 <div className="flex items-center justify-between gap-6">
                   {/* Left: Company & Role */}
                   <div className="flex-1">
-                    <h3 className="font-semibold text-foreground text-sm mb-2">Neural Dynamics Inc.</h3>
+                    <h3 className="font-semibold text-foreground text-sm mb-2">ClosedAI</h3>
                     <h2 className="text-lg font-serif font-bold text-foreground mb-2">
                       AI Research
                     </h2>
@@ -104,7 +104,69 @@ const TalentDashboard = () => {
               </CardContent>
             </Card>
 
-            {/* Additional invitation items can be added here */}
+            {/* Card 2: Equity Research */}
+            <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between gap-6">
+                  {/* Left: Company & Role */}
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-foreground text-sm mb-2">Goldman Stanley</h3>
+                    <h2 className="text-lg font-serif font-bold text-foreground mb-2">
+                      Equity Research
+                    </h2>
+                    <div className="flex gap-4 text-sm text-muted-foreground">
+                      <span>London</span>
+                      <span>June - Aug 2026</span>
+                    </div>
+                  </div>
+
+                  {/* Right: Action Buttons */}
+                  <div className="flex gap-4 items-center flex-shrink-0">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                      Reject
+                    </button>
+                    <Button 
+                      className="text-black hover:opacity-90 text-sm h-9 px-4"
+                      style={{ backgroundColor: '#D4FF5E' }}
+                    >
+                      Accept
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Card 3: Product Management */}
+            <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between gap-6">
+                  {/* Left: Company & Role */}
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-foreground text-sm mb-2">Mega</h3>
+                    <h2 className="text-lg font-serif font-bold text-foreground mb-2">
+                      Product Management
+                    </h2>
+                    <div className="flex gap-4 text-sm text-muted-foreground">
+                      <span>San Francisco</span>
+                      <span>July - Sep 2026</span>
+                    </div>
+                  </div>
+
+                  {/* Right: Action Buttons */}
+                  <div className="flex gap-4 items-center flex-shrink-0">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                      Reject
+                    </button>
+                    <Button 
+                      className="text-black hover:opacity-90 text-sm h-9 px-4"
+                      style={{ backgroundColor: '#D4FF5E' }}
+                    >
+                      Accept
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
