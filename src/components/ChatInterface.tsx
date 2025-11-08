@@ -16,7 +16,7 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "agent",
-      content: "Ready to say goodbye to CVs and Cover Letters for good? Just drop your CV, portfolio, LinkedIn, or GitHub, and I'll start building your profile.",
+      content: "Ready to say goodbye to CVs and Cover Letters for good? Just drop anything relevant about you, and I'll start building your profile.",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -57,7 +57,7 @@ const ChatInterface = () => {
   return (
     <div className="flex flex-col h-screen bg-background">
       {/* Upper Section - Categories */}
-      <div className="h-[55%] border-b border-border p-6 overflow-hidden">
+      <div className={`border-b border-border p-6 overflow-hidden transition-all duration-300 ${selectedCategory ? 'h-[55%]' : 'h-[15%]'}`}>
         <div className="h-full flex flex-col gap-3">
           {/* Selected Category Expanded View */}
           {selectedCategory && (
@@ -88,7 +88,7 @@ const ChatInterface = () => {
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
                 <div className="relative h-full flex items-center justify-center p-4">
-                  <p className="text-sm font-medium text-center">{category}</p>
+                  <p className="text-base font-bold text-center">{category}</p>
                 </div>
               </Card>
             ))}
@@ -97,7 +97,7 @@ const ChatInterface = () => {
       </div>
 
       {/* Lower Section - AI Chat Only */}
-      <div className="h-[45%] flex flex-col">
+      <div className={`flex flex-col transition-all duration-300 ${selectedCategory ? 'h-[45%]' : 'h-[85%]'}`}>
         <ScrollArea className="flex-1 p-6">
           <div className="max-w-3xl mx-auto space-y-4">
             {agentMessages.map((message, index) => (
