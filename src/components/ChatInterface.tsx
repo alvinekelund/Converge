@@ -131,8 +131,8 @@ const ChatInterface = () => {
                   className="absolute inset-0 bg-primary/10 transition-all duration-500"
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
-                <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
-                  <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full px-2 ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
+                <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-4'}`}>
+                  <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
                     {category}
                   </p>
                 </div>
@@ -142,7 +142,7 @@ const ChatInterface = () => {
             {/* Add Category Button */}
             {isAddingCategory ? (
               <Card className={`relative overflow-hidden transition-all animate-scale-in ${selectedCategory ? '' : 'min-w-[180px] h-full flex-shrink-0'}`}>
-                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
+                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-4'}`}>
                   <Input
                     autoFocus
                     value={newCategoryName}
@@ -159,7 +159,7 @@ const ChatInterface = () => {
                 onClick={() => setIsAddingCategory(true)}
                 className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20 ${selectedCategory ? '' : 'min-w-[180px] h-full flex-shrink-0'}`}
               >
-                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
+                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-4'}`}>
                   <span className="text-3xl font-light text-muted-foreground">+</span>
                 </div>
               </Card>
