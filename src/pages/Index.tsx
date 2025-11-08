@@ -108,7 +108,7 @@ const Index = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
           <a href="/candidate" className="inline-block">
             <button className="px-8 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium">
-              Candidate Profile
+              Talent Portal
             </button>
           </a>
           <a href="/recruiter" className="inline-block">

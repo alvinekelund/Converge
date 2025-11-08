@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -10,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const Candidate = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -108,8 +110,37 @@ const Candidate = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <>
+      <Dialog open={showWelcome} onOpenChange={setShowWelcome}>
+        <DialogContent className="max-w-full w-screen h-screen border-0 p-0 bg-black/95 flex items-center justify-center [&>button]:hidden">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
+          
+          <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent opacity-50 animate-pulse-glow" />
+          
+          <div className="relative z-10 text-center space-y-8 px-8 max-w-4xl">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-tight">
+              This is the last application you'll ever fill out.
+            </h1>
+            
+            <p className="text-2xl md:text-3xl text-muted-foreground/80 font-light">
+              Your new agent will find you opportunities. We seek while you sleep.
+            </p>
+            
+            <div className="pt-8">
+              <Button
+                onClick={() => setShowWelcome(false)}
+                size="lg"
+                className="px-12 py-6 text-lg font-medium bg-primary text-primary-foreground shadow-[0_0_40px_rgba(var(--primary-rgb),0.5)] hover:shadow-[0_0_60px_rgba(var(--primary-rgb),0.7)] transition-all duration-300 animate-pulse-glow"
+              >
+                Build My Agent
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-6">
+        <div className="max-w-4xl mx-auto space-y-6">
         <Link to="/">
           <Button variant="ghost" className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -118,7 +149,7 @@ const Candidate = () => {
         </Link>
 
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Candidate Profile</h1>
+          <h1 className="text-4xl font-bold text-foreground mb-2">Talent Portal</h1>
           <p className="text-muted-foreground">Complete your professional profile</p>
         </div>
 
@@ -289,6 +320,7 @@ const Candidate = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
