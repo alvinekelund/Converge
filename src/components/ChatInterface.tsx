@@ -43,12 +43,17 @@ const ChatInterface = () => {
   const [newCategoryName, setNewCategoryName] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [attachedFile, setAttachedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
-    if (inputValue.trim()) {
-      setMessages([...messages, { role: "user", content: inputValue }]);
+    if (inputValue.trim() || attachedFile) {
+      const content = attachedFile 
+        ? `${inputValue.trim() ? inputValue + ' ' : ''}📄 ${attachedFile.name}`
+        : inputValue;
+      setMessages([...messages, { role: "user", content }]);
       setInputValue("");
+      setAttachedFile(null);
       setIsThinking(true);
       // Simulate thinking for demo
       setTimeout(() => setIsThinking(false), 3000);
@@ -57,9 +62,7 @@ const ChatInterface = () => {
 
   const handleFileSelect = (file: File) => {
     if (file.type === "application/pdf") {
-      setMessages([...messages, { role: "user", content: `📄 Uploaded: ${file.name}` }]);
-      setIsThinking(true);
-      setTimeout(() => setIsThinking(false), 3000);
+      setAttachedFile(file);
     }
   };
 
@@ -186,7 +189,7 @@ const ChatInterface = () => {
                   <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
                     {isThinking ? (
                       <>
-                        thinking<ThinkingDots />
+                        reasoning<ThinkingDots />
                       </>
                     ) : (
                       category
@@ -264,6 +267,18 @@ const ChatInterface = () => {
                   placeholder="Type, paste a link, or just tell me..."
                   className="pr-24 py-6 text-base bg-background border-border rounded-2xl"
                 />
+                {attachedFile && (
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2 bg-muted px-2 py-1 rounded-md">
+                    <Paperclip className="h-3 w-3" />
+                    <span className="text-xs max-w-[150px] truncate">{attachedFile.name}</span>
+                    <button 
+                      onClick={() => setAttachedFile(null)}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      ×
+                    </button>
+                  </div>
+                )}
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-2">
                   <Button
                     size="icon"
