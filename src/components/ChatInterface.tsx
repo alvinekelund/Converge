@@ -116,7 +116,7 @@ const ChatInterface = () => {
           
           {/* Category Boxes */}
           <div 
-            className={`${selectedCategory ? 'grid gap-3 h-[20%]' : 'flex gap-4 overflow-x-auto pb-2 h-full'}`}
+            className={`${selectedCategory ? 'grid gap-3 h-[26%]' : 'flex gap-4 overflow-x-auto pb-2 h-full'}`}
             style={selectedCategory ? { gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` } : {}}
           >
             {categories.map((category) => (
