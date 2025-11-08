@@ -173,19 +173,14 @@ const ChatInterface = () => {
         <ScrollArea className="flex-1 p-6">
           <div className="max-w-4xl mx-auto">
             {messages.length === 1 && messages[0].role === "agent" ? (
-              <h1 className="text-6xl font-serif leading-tight mt-12">
-                Ready to say goodbye to <span className="relative inline-block">
-                  <span className="relative z-10">CVs</span>
-                  <svg className="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)]" style={{ left: '-8px', top: '-8px' }}>
-                    <ellipse cx="50%" cy="50%" rx="48%" ry="60%" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" opacity="0.6"/>
-                  </svg>
-                </span> and <span className="relative inline-block">
-                  <span className="relative z-10">Cover Letters</span>
-                  <svg className="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)]" style={{ left: '-8px', top: '-8px' }}>
-                    <ellipse cx="50%" cy="50%" rx="48%" ry="60%" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" opacity="0.6"/>
-                  </svg>
-                </span> for good?
-              </h1>
+              <div className="mt-12 max-w-[70%]">
+                <h1 className="text-5xl font-serif leading-tight mb-6">
+                  Ready to say goodbye to CVs and Cover Letters for good?
+                </h1>
+                <p className="text-xl text-muted-foreground font-sans leading-relaxed">
+                  Just drop anything relevant about you, and I'll start building your profile.
+                </p>
+              </div>
             ) : (
               <div className="space-y-4">
                 {agentMessages.map((message, index) => (
