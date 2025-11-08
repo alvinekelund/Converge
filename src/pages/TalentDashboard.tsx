@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Check, X, Briefcase } from "lucide-react";
+import { Check, Briefcase } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const TalentDashboard = () => {
@@ -14,26 +14,26 @@ const TalentDashboard = () => {
           Your Agent is Ready
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Module 1: Core Skills */}
           <button
             onClick={() => navigate("/profiles")}
             className="w-full text-left"
           >
-            <Card className="p-4 hover:shadow-md transition-shadow">
+            <Card className="p-4 border border-border rounded-lg bg-white hover:shadow-sm transition-shadow">
               <h3 className="text-lg font-semibold text-foreground mb-2">Core Skills</h3>
               <p className="text-sm text-muted-foreground">Configured</p>
             </Card>
           </button>
 
-          {/* Module 2: Career Aspirations - PULSING */}
+          {/* Module 2: Career Aspirations */}
           <button
             onClick={() => navigate("/profiles")}
             className="w-full text-left"
           >
-            <Card className="p-4 border-2 border-orange-500 animate-pulse hover:shadow-md transition-shadow">
+            <Card className="p-4 border border-border rounded-lg bg-white hover:shadow-sm transition-shadow">
               <h3 className="text-lg font-semibold text-foreground mb-2">Career Aspirations</h3>
-              <p className="text-sm text-orange-600 font-medium">
+              <p className="text-sm text-muted-foreground">
                 Your agent needs to know your dream job to find it. Let's talk.
               </p>
             </Card>
@@ -44,9 +44,12 @@ const TalentDashboard = () => {
             onClick={() => navigate("/profiles")}
             className="w-full text-left"
           >
-            <Card className="p-4 border-2 border-green-500 shadow-green-500/20 hover:shadow-md transition-shadow">
+            <Card className="p-4 border border-border rounded-lg bg-white hover:shadow-sm transition-shadow">
               <h3 className="text-lg font-semibold text-foreground mb-2">Project Highlights</h3>
-              <p className="text-sm text-green-600 font-medium">✓ Active</p>
+              <p className="text-sm text-foreground flex items-center gap-1.5">
+                <Check className="w-4 h-4" style={{ color: '#D4FF5E' }} />
+                Active
+              </p>
             </Card>
           </button>
         </div>
@@ -95,7 +98,8 @@ const TalentDashboard = () => {
                       Reject
                     </Button>
                     <Button 
-                      className="bg-[#84cc16] hover:bg-[#65a30d] text-white"
+                      className="text-black hover:opacity-90"
+                      style={{ backgroundColor: '#D4FF5E' }}
                     >
                       Accept
                     </Button>
