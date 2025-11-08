@@ -171,14 +171,32 @@ const ChatInterface = () => {
       {/* Lower Section - AI Chat Only */}
       <div className={`flex flex-col transition-all duration-300 ${selectedCategory ? 'h-[45%]' : 'h-[85%]'}`}>
         <ScrollArea className="flex-1 p-6">
-          <div className="max-w-3xl mx-auto space-y-4">
-            {agentMessages.map((message, index) => (
-              <div key={index} className="flex justify-start">
-                <div className="rounded-2xl px-6 py-4 max-w-[80%] bg-card border border-border">
-                  <p className="text-sm leading-relaxed">{message.content}</p>
-                </div>
+          <div className="max-w-4xl mx-auto">
+            {messages.length === 1 && messages[0].role === "agent" ? (
+              <h1 className="text-6xl font-serif leading-tight mt-12">
+                Ready to say goodbye to <span className="relative inline-block">
+                  <span className="relative z-10">CVs</span>
+                  <svg className="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)]" style={{ left: '-8px', top: '-8px' }}>
+                    <ellipse cx="50%" cy="50%" rx="48%" ry="60%" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" opacity="0.6"/>
+                  </svg>
+                </span> and <span className="relative inline-block">
+                  <span className="relative z-10">Cover Letters</span>
+                  <svg className="absolute -inset-2 w-[calc(100%+16px)] h-[calc(100%+16px)]" style={{ left: '-8px', top: '-8px' }}>
+                    <ellipse cx="50%" cy="50%" rx="48%" ry="60%" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" opacity="0.6"/>
+                  </svg>
+                </span> for good?
+              </h1>
+            ) : (
+              <div className="space-y-4">
+                {agentMessages.map((message, index) => (
+                  <div key={index} className="flex justify-start">
+                    <div className="rounded-2xl px-6 py-4 max-w-[80%] bg-card border border-border">
+                      <p className="text-sm leading-relaxed">{message.content}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </ScrollArea>
 
