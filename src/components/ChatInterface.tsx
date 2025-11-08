@@ -10,7 +10,7 @@ interface Message {
   content: string;
 }
 
-type Category = "Experience" | "Education" | "Projects" | "Extracurriculars" | "Preferences" | "Skills";
+type Category = string;
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>([
@@ -21,6 +21,14 @@ const ChatInterface = () => {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [categories, setCategories] = useState<Category[]>([
+    "Experience",
+    "Education", 
+    "Projects",
+    "Extracurriculars",
+    "Preferences",
+    "Skills"
+  ]);
   const [categoryProgress, setCategoryProgress] = useState<Record<Category, number>>({
     Experience: 0,
     Education: 0,
@@ -29,9 +37,9 @@ const ChatInterface = () => {
     Preferences: 0,
     Skills: 0,
   });
+  const [isAddingCategory, setIsAddingCategory] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const categories: Category[] = ["Experience", "Education", "Projects", "Extracurriculars", "Preferences", "Skills"];
 
   const handleSend = () => {
     if (inputValue.trim()) {
@@ -52,7 +60,27 @@ const ChatInterface = () => {
     setSelectedCategory(selectedCategory === category ? null : category);
   };
 
+  const handleAddCategory = () => {
+    if (newCategoryName.trim() && !categories.includes(newCategoryName.trim())) {
+      const newCategory = newCategoryName.trim();
+      setCategories([...categories, newCategory]);
+      setCategoryProgress({ ...categoryProgress, [newCategory]: 0 });
+      setNewCategoryName("");
+      setIsAddingCategory(false);
+    }
+  };
+
+  const handleAddCategoryKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleAddCategory();
+    } else if (e.key === "Escape") {
+      setIsAddingCategory(false);
+      setNewCategoryName("");
+    }
+  };
+
   const agentMessages = messages.filter(m => m.role === "agent");
+  const gridCols = Math.min(categories.length + 1, 7);
 
   return (
     <div className="flex flex-col h-screen bg-background">
@@ -61,37 +89,79 @@ const ChatInterface = () => {
         <div className="h-full flex flex-col gap-3">
           {/* Selected Category Expanded View */}
           {selectedCategory && (
-            <Card className="flex-1 p-6 overflow-auto relative">
-              <div className="absolute inset-0 bg-primary/5" style={{ width: `${categoryProgress[selectedCategory]}%` }} />
+            <Card className="flex-1 p-6 overflow-auto relative animate-fade-in">
+              <div className="absolute inset-0 bg-primary/5 transition-all duration-500" style={{ width: `${categoryProgress[selectedCategory]}%` }} />
               <div className="relative">
                 <h2 className="text-2xl font-semibold mb-4">{selectedCategory}</h2>
-                <p className="text-muted-foreground">
-                  {categoryProgress[selectedCategory]}% complete
-                </p>
+                {categoryProgress[selectedCategory] === 0 ? (
+                  <p className="text-muted-foreground flex items-center gap-2">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground"></span>
+                    Ready when you are
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground">
+                    {categoryProgress[selectedCategory]}% complete
+                  </p>
+                )}
                 {/* TODO: Add category-specific content here */}
               </div>
             </Card>
           )}
           
           {/* Category Boxes */}
-          <div className={`grid grid-cols-6 gap-3 ${selectedCategory ? 'h-[10%]' : 'h-full'}`}>
+          <div 
+            className={`grid gap-3 ${selectedCategory ? 'h-[10%]' : 'h-full'}`}
+            style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}
+          >
             {categories.map((category) => (
               <Card
                 key={category}
                 onClick={() => handleCategoryClick(category)}
-                className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 ${
+                className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale ${
                   selectedCategory === category ? 'opacity-50' : ''
                 }`}
               >
                 <div 
-                  className="absolute inset-0 bg-primary/10 transition-all"
+                  className="absolute inset-0 bg-primary/10 transition-all duration-500"
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
-                <div className="relative h-full flex items-center justify-center p-4">
+                <div className="relative h-full flex flex-col items-center justify-center p-4 gap-2">
                   <p className="text-base font-bold text-center">{category}</p>
+                  {categoryProgress[category] === 0 && (
+                    <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                      <span className="inline-block w-1 h-1 rounded-full bg-muted-foreground"></span>
+                      Ready when you are
+                    </p>
+                  )}
                 </div>
               </Card>
             ))}
+            
+            {/* Add Category Button */}
+            {isAddingCategory ? (
+              <Card className="relative overflow-hidden transition-all animate-scale-in">
+                <div className="h-full flex items-center justify-center p-4">
+                  <Input
+                    autoFocus
+                    value={newCategoryName}
+                    onChange={(e) => setNewCategoryName(e.target.value)}
+                    onKeyDown={handleAddCategoryKeyPress}
+                    onBlur={handleAddCategory}
+                    placeholder="Category name"
+                    className="h-8 text-sm text-center border-none focus-visible:ring-1"
+                  />
+                </div>
+              </Card>
+            ) : (
+              <Card
+                onClick={() => setIsAddingCategory(true)}
+                className="relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20"
+              >
+                <div className="h-full flex items-center justify-center p-4">
+                  <span className="text-3xl font-light text-muted-foreground">+</span>
+                </div>
+              </Card>
+            )}
           </div>
         </div>
       </div>
