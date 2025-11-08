@@ -151,26 +151,6 @@ const Candidate = () => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Preferences</CardTitle>
-            <CardDescription>Your job preferences</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="jobType">Preferred Job Type</Label>
-              <Input id="jobType" placeholder="Full-time, Remote, Contract..." />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="location">Preferred Location</Label>
-              <Input id="location" placeholder="San Francisco, CA or Remote" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="salary">Expected Salary Range</Label>
-              <Input id="salary" placeholder="$80,000 - $120,000" />
-            </div>
-          </CardContent>
-        </Card>
 
         <Card>
           <CardHeader>
