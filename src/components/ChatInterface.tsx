@@ -148,13 +148,19 @@ const ChatInterface = () => {
                 {categoryProgress[selectedCategory] === 0 ? (
                   <p className="text-muted-foreground flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground"></span>
-                    {selectedCategory === "Experience" && "Work, tasks, responsibilities, leadership..."}
-                    {selectedCategory === "Education" && "Degrees, grades, coursework, research..."}
-                    {selectedCategory === "Projects" && "Passion projects, school projects, hackathons..."}
-                    {selectedCategory === "Extracurriculars" && "Volunteering, activities, societies, initiatives..."}
-                    {selectedCategory === "Preferences" && "Location, timing, industry, function..."}
-                    {selectedCategory === "Skills" && "Languages, technical..."}
-                    {!["Experience", "Education", "Projects", "Extracurriculars", "Preferences", "Skills"].includes(selectedCategory) && "Ready when you are"}
+                    {isThinking ? (
+                      "Briefing your agent..."
+                    ) : (
+                      <>
+                        {selectedCategory === "Experience" && "Work, tasks, responsibilities, leadership..."}
+                        {selectedCategory === "Education" && "Degrees, grades, coursework, research..."}
+                        {selectedCategory === "Projects" && "Passion projects, school projects, hackathons..."}
+                        {selectedCategory === "Extracurriculars" && "Volunteering, activities, societies, initiatives..."}
+                        {selectedCategory === "Preferences" && "Location, timing, industry, function..."}
+                        {selectedCategory === "Skills" && "Languages, technical..."}
+                        {!["Experience", "Education", "Projects", "Extracurriculars", "Preferences", "Skills"].includes(selectedCategory) && "Ready when you are"}
+                      </>
+                    )}
                   </p>
                 ) : (
                   <p className="text-muted-foreground">
