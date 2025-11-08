@@ -22,6 +22,7 @@ export type Database = {
           description: string | null
           id: string
           location: string | null
+          preferred: string | null
           qualifications: string | null
           responsibilities: string | null
           title: string
@@ -34,6 +35,7 @@ export type Database = {
           description?: string | null
           id?: string
           location?: string | null
+          preferred?: string | null
           qualifications?: string | null
           responsibilities?: string | null
           title: string
@@ -46,6 +48,7 @@ export type Database = {
           description?: string | null
           id?: string
           location?: string | null
+          preferred?: string | null
           qualifications?: string | null
           responsibilities?: string | null
           title?: string
