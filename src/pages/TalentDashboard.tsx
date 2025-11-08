@@ -89,15 +89,23 @@ const TalentDashboard = () => {
                   </div>
 
                   {/* Right: Action Buttons */}
-                  <div className="flex gap-4 items-center flex-shrink-0">
-                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      Reject
-                    </button>
+                  <div className="flex flex-col gap-2 flex-shrink-0">
+                    <div className="flex gap-4 items-center">
+                      <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Reject
+                      </button>
+                      <Button 
+                        className="text-black hover:opacity-90 text-sm h-9 px-4"
+                        style={{ backgroundColor: '#D4FF5E' }}
+                      >
+                        Accept
+                      </Button>
+                    </div>
                     <Button 
-                      className="text-black hover:opacity-90 text-sm h-9 px-4"
-                      style={{ backgroundColor: '#D4FF5E' }}
+                      className="text-black text-sm h-9 w-full"
+                      style={{ backgroundColor: '#E8E8E8' }}
                     >
-                      Accept
+                      Details
                     </Button>
                   </div>
                 </div>
@@ -121,15 +129,23 @@ const TalentDashboard = () => {
                   </div>
 
                   {/* Right: Action Buttons */}
-                  <div className="flex gap-4 items-center flex-shrink-0">
-                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      Reject
-                    </button>
+                  <div className="flex flex-col gap-2 flex-shrink-0">
+                    <div className="flex gap-4 items-center">
+                      <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Reject
+                      </button>
+                      <Button 
+                        className="text-black hover:opacity-90 text-sm h-9 px-4"
+                        style={{ backgroundColor: '#D4FF5E' }}
+                      >
+                        Accept
+                      </Button>
+                    </div>
                     <Button 
-                      className="text-black hover:opacity-90 text-sm h-9 px-4"
-                      style={{ backgroundColor: '#D4FF5E' }}
+                      className="text-black text-sm h-9 w-full"
+                      style={{ backgroundColor: '#E8E8E8' }}
                     >
-                      Accept
+                      Details
                     </Button>
                   </div>
                 </div>
@@ -153,15 +169,23 @@ const TalentDashboard = () => {
                   </div>
 
                   {/* Right: Action Buttons */}
-                  <div className="flex gap-4 items-center flex-shrink-0">
-                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      Reject
-                    </button>
+                  <div className="flex flex-col gap-2 flex-shrink-0">
+                    <div className="flex gap-4 items-center">
+                      <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        Reject
+                      </button>
+                      <Button 
+                        className="text-black hover:opacity-90 text-sm h-9 px-4"
+                        style={{ backgroundColor: '#D4FF5E' }}
+                      >
+                        Accept
+                      </Button>
+                    </div>
                     <Button 
-                      className="text-black hover:opacity-90 text-sm h-9 px-4"
-                      style={{ backgroundColor: '#D4FF5E' }}
+                      className="text-black text-sm h-9 w-full"
+                      style={{ backgroundColor: '#E8E8E8' }}
                     >
-                      Accept
+                      Details
                     </Button>
                   </div>
                 </div>
