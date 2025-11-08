@@ -75,36 +75,24 @@ const TalentDashboard = () => {
             {/* Invitation Item */}
             <Card className="w-full rounded-2xl border border-border/50 shadow-sm hover:shadow-md transition-shadow">
               <CardContent className="p-5">
-                <div className="flex items-center gap-6">
-                  {/* Left: Logo & Company */}
-                  <div className="flex items-center gap-3 min-w-[200px]">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/60 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <Briefcase className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground text-sm">Neural Dynamics Inc.</h3>
-                    </div>
-                  </div>
-
-                  {/* Middle: Role & Details */}
+                <div className="flex items-center justify-between gap-6">
+                  {/* Left: Company & Role */}
                   <div className="flex-1">
-                    <h2 className="text-lg font-serif font-bold text-foreground mb-1">
-                      AI Research Intern
+                    <h3 className="font-semibold text-foreground text-sm mb-2">Neural Dynamics Inc.</h3>
+                    <h2 className="text-lg font-serif font-bold text-foreground mb-2">
+                      AI Research
                     </h2>
                     <div className="flex gap-4 text-sm text-muted-foreground">
-                      <span>📍 Helsinki / Remote</span>
-                      <span>📅 June - Aug 2026</span>
+                      <span>Helsinki / Remote</span>
+                      <span>June - Aug 2026</span>
                     </div>
                   </div>
 
                   {/* Right: Action Buttons */}
-                  <div className="flex gap-3 flex-shrink-0">
-                    <Button 
-                      variant="outline" 
-                      className="border-border hover:bg-muted text-sm h-9 px-4"
-                    >
+                  <div className="flex gap-4 items-center flex-shrink-0">
+                    <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                       Reject
-                    </Button>
+                    </button>
                     <Button 
                       className="text-black hover:opacity-90 text-sm h-9 px-4"
                       style={{ backgroundColor: '#D4FF5E' }}
