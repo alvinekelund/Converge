@@ -96,7 +96,13 @@ const ChatInterface = () => {
                 {categoryProgress[selectedCategory] === 0 ? (
                   <p className="text-muted-foreground flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 rounded-full bg-muted-foreground"></span>
-                    Ready when you are
+                    {selectedCategory === "Experience" && "Work, tasks, responsibilities, leadership..."}
+                    {selectedCategory === "Education" && "Degrees, grades, coursework, research..."}
+                    {selectedCategory === "Projects" && "Passion projects, school projects, hackathons..."}
+                    {selectedCategory === "Extracurriculars" && "Volunteering, activities, societies, initiatives..."}
+                    {selectedCategory === "Preferences" && "Location, timing, industry, function..."}
+                    {selectedCategory === "Skills" && "Languages, technical..."}
+                    {!["Experience", "Education", "Projects", "Extracurriculars", "Preferences", "Skills"].includes(selectedCategory) && "Ready when you are"}
                   </p>
                 ) : (
                   <p className="text-muted-foreground">
@@ -125,14 +131,8 @@ const ChatInterface = () => {
                   className="absolute inset-0 bg-primary/10 transition-all duration-500"
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
-                <div className="relative h-full flex flex-col items-center justify-center p-4 gap-2">
+                <div className="relative h-full flex flex-col items-center justify-center p-4">
                   <p className="text-base font-bold text-center">{category}</p>
-                  {categoryProgress[category] === 0 && (
-                    <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-                      <span className="inline-block w-1 h-1 rounded-full bg-muted-foreground"></span>
-                      Ready when you are
-                    </p>
-                  )}
                 </div>
               </Card>
             ))}
