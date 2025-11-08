@@ -15,11 +15,26 @@ const Index = () => {
         <div className="absolute bottom-1/3 right-2/3 w-1.5 h-1.5 bg-primary/20 rounded-full animate-float" style={{ animationDelay: '4s' }} />
       </div>
 
-      <div className="relative z-10 text-center space-y-2">
-        <h1 className="text-5xl font-bold tracking-tight text-foreground animate-float">
-          Agentic Hack 2025
-        </h1>
-        <p className="text-lg text-muted-foreground">Ready to build</p>
+      <div className="relative z-10 text-center space-y-6">
+        <div className="space-y-2">
+          <h1 className="text-5xl font-bold tracking-tight text-foreground animate-float">
+            Agentic Hack 2025
+          </h1>
+          <p className="text-lg text-muted-foreground">Ready to build</p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+          <a href="/candidate" className="inline-block">
+            <button className="px-8 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium">
+              Candidate Profile
+            </button>
+          </a>
+          <a href="/recruiter" className="inline-block">
+            <button className="px-8 py-3 rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors font-medium">
+              Recruiter Portal
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   );
