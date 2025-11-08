@@ -1,7 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -12,47 +9,32 @@ import { useToast } from "@/hooks/use-toast";
 const Recruiter = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    title: "",
-    companyName: "",
-    companyWebsite: "",
-    companySize: "",
-    location: "",
-    workType: "",
-    aboutUs: "",
-    jobDescription: "",
-    employmentType: "",
-    salaryRange: "",
-    responsibilities: "",
-    qualifications: "",
-    preferred: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
-  };
+  const [jobDescription, setJobDescription] = useState("");
 
   const handleSubmit = async () => {
+    if (!jobDescription.trim()) {
+      toast({
+        title: "Error",
+        description: "Please enter a job description",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      // Combine related fields into TEXT columns
-      const company = `${formData.companyName}\nWebsite: ${formData.companyWebsite}\nSize: ${formData.companySize}`;
-      const location = `${formData.location} (${formData.workType})`;
-      const description = `${formData.jobDescription}\n\nEmployment Type: ${formData.employmentType}\nSalary Range: ${formData.salaryRange}`;
-
       const { error } = await supabase
         .from("postings")
         .insert({
-          title: formData.title,
-          company,
-          location,
-          about: formData.aboutUs,
-          description,
-          responsibilities: formData.responsibilities,
-          qualifications: formData.qualifications,
-          preferred: formData.preferred,
+          title: "New Position",
+          company: "Company Name",
+          location: "Location TBD",
+          about: "",
+          description: jobDescription,
+          responsibilities: "",
+          qualifications: "",
+          preferred: "",
         });
 
       if (error) throw error;
@@ -62,22 +44,7 @@ const Recruiter = () => {
         description: "Your job posting has been submitted successfully.",
       });
 
-      // Reset form
-      setFormData({
-        title: "",
-        companyName: "",
-        companyWebsite: "",
-        companySize: "",
-        location: "",
-        workType: "",
-        aboutUs: "",
-        jobDescription: "",
-        employmentType: "",
-        salaryRange: "",
-        responsibilities: "",
-        qualifications: "",
-        preferred: "",
-      });
+      setJobDescription("");
     } catch (error) {
       console.error("Error submitting job posting:", error);
       toast({
@@ -91,8 +58,9 @@ const Recruiter = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="flex flex-col h-screen bg-background">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col p-6">
         <Link to="/">
           <Button variant="ghost" className="mb-4">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -100,162 +68,45 @@ const Recruiter = () => {
           </Button>
         </Link>
 
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-2">Job Posting</h1>
-          <p className="text-muted-foreground">Create a new job opportunity</p>
+        <div className="flex-1 flex items-center justify-center">
+          <div className="max-w-4xl w-full space-y-8">
+            <div className="max-w-[75%]">
+              <h1 className="text-5xl font-serif leading-tight mb-4">
+                Ready to say goodbye to screening and pipeline management?
+              </h1>
+              <h2 className="text-3xl font-serif leading-tight mb-6 text-foreground/90">
+                10x qualified applicants with 10x speed
+              </h2>
+              <p className="text-xl text-muted-foreground font-sans leading-relaxed">
+                Just drop your job description, and I'll start building your agent workforce.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Job Title</CardTitle>
-            <CardDescription>The position you're hiring for</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="title">Title</Label>
-            <Input id="title" placeholder="Senior Software Engineer" value={formData.title} onChange={handleInputChange} />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Company</CardTitle>
-            <CardDescription>Company information</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="companyName">Company Name</Label>
-              <Input id="companyName" placeholder="Tech Innovations Inc." value={formData.companyName} onChange={handleInputChange} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="companyWebsite">Company Website</Label>
-              <Input id="companyWebsite" type="url" placeholder="https://company.com" value={formData.companyWebsite} onChange={handleInputChange} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="companySize">Company Size</Label>
-              <Input id="companySize" placeholder="50-200 employees" value={formData.companySize} onChange={handleInputChange} />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Location</CardTitle>
-            <CardDescription>Where is this position based?</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="location">Location</Label>
-              <Input id="location" placeholder="San Francisco, CA" value={formData.location} onChange={handleInputChange} />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="workType">Work Type</Label>
-              <Input id="workType" placeholder="Remote, Hybrid, or On-site" value={formData.workType} onChange={handleInputChange} />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>About Us</CardTitle>
-            <CardDescription>Tell candidates about your company</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="aboutUs">Company Description</Label>
-            <Textarea 
-              id="aboutUs" 
-              placeholder="Describe your company culture, mission, and values..." 
-              rows={5}
-              value={formData.aboutUs}
-              onChange={handleInputChange}
-            />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Description</CardTitle>
-            <CardDescription>Overview of the role</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="jobDescription">Job Description</Label>
-              <Textarea 
-                id="jobDescription" 
-                placeholder="Provide a detailed description of the role..." 
-                rows={6}
-                value={formData.jobDescription}
-                onChange={handleInputChange}
+      {/* Input Bar - Fixed at bottom */}
+      <div className="border-t border-border bg-card/50 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto p-4">
+          <div className="flex gap-3 items-end">
+            <div className="flex-1 relative">
+              <Textarea
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+                placeholder="Paste your job description here..."
+                className="min-h-[60px] max-h-[200px] py-4 px-4 text-base bg-background border-border rounded-2xl resize-none"
+                rows={2}
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="employmentType">Employment Type</Label>
-                <Input id="employmentType" placeholder="Full-time, Part-time, Contract" value={formData.employmentType} onChange={handleInputChange} />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="salaryRange">Salary Range</Label>
-                <Input id="salaryRange" placeholder="$100,000 - $150,000" value={formData.salaryRange} onChange={handleInputChange} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Responsibilities</CardTitle>
-            <CardDescription>Key duties and tasks</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="responsibilities">Responsibilities</Label>
-            <Textarea 
-              id="responsibilities" 
-              placeholder="• Lead development of new features&#10;• Mentor junior developers&#10;• Collaborate with cross-functional teams..." 
-              rows={8}
-              value={formData.responsibilities}
-              onChange={handleInputChange}
-            />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Qualifications</CardTitle>
-            <CardDescription>Required qualifications and experience</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="qualifications">Required Qualifications</Label>
-            <Textarea 
-              id="qualifications" 
-              placeholder="• Bachelor's degree in Computer Science or related field&#10;• 5+ years of software development experience&#10;• Proficiency in React and TypeScript..." 
-              rows={8}
-              value={formData.qualifications}
-              onChange={handleInputChange}
-            />
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Preferred</CardTitle>
-            <CardDescription>Nice-to-have qualifications</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Label htmlFor="preferred">Preferred Qualifications</Label>
-            <Textarea 
-              id="preferred" 
-              placeholder="• Experience with cloud platforms (AWS, Azure, GCP)&#10;• Previous startup experience&#10;• Open source contributions..." 
-              rows={6}
-              value={formData.preferred}
-              onChange={handleInputChange}
-            />
-          </CardContent>
-        </Card>
-
-        <div className="flex justify-end gap-4 pb-8">
-          <Button variant="outline" disabled={isSubmitting}>Save Draft</Button>
-          <Button onClick={handleSubmit} disabled={isSubmitting}>
-            {isSubmitting ? "Posting..." : "Post Job"}
-          </Button>
+            <Button
+              onClick={handleSubmit}
+              disabled={isSubmitting}
+              className="h-12 px-6 rounded-full text-black font-medium hover:opacity-90"
+              style={{ backgroundColor: "#cde75e" }}
+            >
+              {isSubmitting ? "Processing..." : "Start Building"}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
