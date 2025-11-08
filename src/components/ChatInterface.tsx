@@ -125,7 +125,7 @@ const ChatInterface = () => {
                 onClick={() => handleCategoryClick(category)}
                 className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale ${
                   selectedCategory === category ? 'opacity-50' : ''
-                } ${selectedCategory ? '' : 'min-w-[180px] min-h-[130px]'}`}
+                } ${selectedCategory ? '' : 'min-w-[180px] h-full flex-shrink-0'}`}
               >
                 <div 
                   className="absolute inset-0 bg-primary/10 transition-all duration-500"
@@ -141,7 +141,7 @@ const ChatInterface = () => {
             
             {/* Add Category Button */}
             {isAddingCategory ? (
-              <Card className={`relative overflow-hidden transition-all animate-scale-in ${selectedCategory ? '' : 'min-w-[180px] min-h-[130px]'}`}>
+              <Card className={`relative overflow-hidden transition-all animate-scale-in ${selectedCategory ? '' : 'min-w-[180px] h-full flex-shrink-0'}`}>
                 <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
                   <Input
                     autoFocus
@@ -157,7 +157,7 @@ const ChatInterface = () => {
             ) : (
               <Card
                 onClick={() => setIsAddingCategory(true)}
-                className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20 ${selectedCategory ? '' : 'min-w-[180px] min-h-[130px]'}`}
+                className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20 ${selectedCategory ? '' : 'min-w-[180px] h-full flex-shrink-0'}`}
               >
                 <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
                   <span className="text-3xl font-light text-muted-foreground">+</span>
