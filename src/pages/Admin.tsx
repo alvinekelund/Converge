@@ -51,7 +51,7 @@ const Admin = () => {
       })) || [];
 
       // Call the matchmaking API
-      const response = await fetch("http://31.22.104.88:8000/run-live-matchmaking", {
+      const response = await fetch("http://127.0.0.1:8000/run-live-matchmaking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
