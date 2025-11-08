@@ -55,8 +55,6 @@ const ChatInterface = () => {
       setInputValue("");
       setAttachedFile(null);
       setIsThinking(true);
-      // Simulate thinking for demo
-      setTimeout(() => setIsThinking(false), 3000);
     }
   };
 
@@ -187,13 +185,7 @@ const ChatInterface = () => {
                 />
                 <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-4'}`}>
                   <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
-                    {isThinking ? (
-                      <>
-                        reasoning<ThinkingDots />
-                      </>
-                    ) : (
-                      category
-                    )}
+                    {category}{isThinking && <ThinkingDots />}
                   </p>
                 </div>
               </Card>
@@ -232,26 +224,14 @@ const ChatInterface = () => {
       <div className={`flex flex-col transition-all duration-300 ${selectedCategory ? 'h-[45%]' : 'h-[85%]'}`}>
         <ScrollArea className="flex-1 p-6">
           <div className="max-w-4xl mx-auto">
-            {messages.length === 1 && messages[0].role === "agent" ? (
-              <div className="mt-12 max-w-[70%]">
-                <h1 className="text-5xl font-serif leading-tight mb-6">
-                  Ready to say goodbye to CVs and Cover Letters for good?
-                </h1>
-                <p className="text-xl text-muted-foreground font-sans leading-relaxed">
-                  Just drop anything relevant about you, and I'll start building your profile.
-                </p>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {agentMessages.map((message, index) => (
-                  <div key={index} className="flex justify-start">
-                    <div className="rounded-2xl px-6 py-4 max-w-[80%] bg-card border border-border">
-                      <p className="text-sm leading-relaxed">{message.content}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="mt-12 max-w-[70%]">
+              <h1 className="text-5xl font-serif leading-tight mb-6">
+                Ready to say goodbye to CVs and Cover Letters for good?
+              </h1>
+              <p className="text-xl text-muted-foreground font-sans leading-relaxed">
+                Just drop anything relevant about you, and I'll start building your profile.
+              </p>
+            </div>
           </div>
         </ScrollArea>
 
