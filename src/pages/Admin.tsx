@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ArrowLeft, Play } from "lucide-react";
+import { ArrowLeft, Play, Infinity } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface MatchResult {
@@ -198,6 +198,16 @@ const Admin = () => {
             </CardContent>
           </Card>
         )}
+
+        {/* Converge branding at bottom */}
+        <div className="flex justify-center items-center py-8">
+          <span className="text-2xl font-bold text-foreground">
+            Converge
+            <sup className="ml-0.5">
+              <Infinity size={16} strokeWidth={2.5} style={{ color: '#D4FF5E' }} />
+            </sup>
+          </span>
+        </div>
       </div>
     </div>
   );
