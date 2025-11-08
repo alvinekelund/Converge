@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const TalentDashboard = () => {
   const navigate = useNavigate();
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [liveProcessesCount, setLiveProcessesCount] = useState(1);
   const [invitations, setInvitations] = useState([
     { id: 1, company: "ClosedAI", role: "AI Research", location: "Helsinki / Remote", dates: "June - Aug 2026" },
     { id: 2, company: "Goldman Stanley", role: "Equity Research", location: "London", dates: "June - Aug 2026" },
@@ -16,6 +17,7 @@ const TalentDashboard = () => {
 
   const handleAccept = (id: number) => {
     setInvitations(invitations.filter(inv => inv.id !== id));
+    setLiveProcessesCount(prev => prev + 1);
   };
 
   return (
@@ -78,7 +80,7 @@ const TalentDashboard = () => {
             className="w-full text-black hover:opacity-90 rounded-lg py-6 font-bold"
             style={{ backgroundColor: '#D4FF5E' }}
           >
-            Live processes (1)
+            Live processes ({liveProcessesCount})
           </Button>
         </div>
       </aside>
