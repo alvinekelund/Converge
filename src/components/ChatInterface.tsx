@@ -41,13 +41,44 @@ const ChatInterface = () => {
   });
   const [isAddingCategory, setIsAddingCategory] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
+  const [isThinking, setIsThinking] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     if (inputValue.trim()) {
       setMessages([...messages, { role: "user", content: inputValue }]);
       setInputValue("");
-      // TODO: Send to AI and get response
+      setIsThinking(true);
+      // Simulate thinking for demo
+      setTimeout(() => setIsThinking(false), 3000);
+    }
+  };
+
+  const handleFileSelect = (file: File) => {
+    if (file.type === "application/pdf") {
+      setMessages([...messages, { role: "user", content: `📄 Uploaded: ${file.name}` }]);
+      setIsThinking(true);
+      setTimeout(() => setIsThinking(false), 3000);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      handleFileSelect(file);
     }
   };
 
@@ -84,8 +115,26 @@ const ChatInterface = () => {
   const agentMessages = messages.filter(m => m.role === "agent");
   const gridCols = Math.min(categories.length + 1, 7);
 
+  const ThinkingDots = () => (
+    <span className="inline-flex gap-0.5">
+      <span className="animate-[pulse_1s_ease-in-out_0s_infinite] opacity-40">.</span>
+      <span className="animate-[pulse_1s_ease-in-out_0.2s_infinite] opacity-40">.</span>
+      <span className="animate-[pulse_1s_ease-in-out_0.4s_infinite] opacity-40">.</span>
+    </span>
+  );
+
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div 
+      className="flex flex-col h-screen bg-background relative"
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      {isDragging && (
+        <div className="absolute inset-0 z-50 bg-primary/10 border-4 border-dashed border-primary flex items-center justify-center">
+          <p className="text-2xl font-medium text-primary">Drop PDF here</p>
+        </div>
+      )}
       {/* Upper Section - Categories */}
       <div className={`border-b border-border p-6 overflow-hidden transition-all duration-300 ${selectedCategory ? 'h-[55%]' : 'h-[15%]'}`}>
         <div className="h-full flex flex-col gap-3">
@@ -135,7 +184,13 @@ const ChatInterface = () => {
                 />
                 <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-4'}`}>
                   <p className={`font-bold text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full ${selectedCategory ? 'text-xs' : 'text-sm'}`}>
-                    {category}
+                    {isThinking ? (
+                      <>
+                        thinking<ThinkingDots />
+                      </>
+                    ) : (
+                      category
+                    )}
                   </p>
                 </div>
               </Card>
@@ -232,10 +287,13 @@ const ChatInterface = () => {
                 <input
                   ref={fileInputRef}
                   type="file"
+                  accept="application/pdf"
                   className="hidden"
                   onChange={(e) => {
-                    // TODO: Handle file upload
-                    console.log("File selected:", e.target.files?.[0]);
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      handleFileSelect(file);
+                    }
                   }}
                 />
               </div>
