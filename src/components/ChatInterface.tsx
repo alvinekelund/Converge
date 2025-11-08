@@ -116,8 +116,8 @@ const ChatInterface = () => {
           
           {/* Category Boxes */}
           <div 
-            className={`grid gap-3 ${selectedCategory ? 'h-[10%]' : 'h-full'}`}
-            style={{ gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` }}
+            className={`${selectedCategory ? 'grid gap-3 h-[20%]' : 'flex gap-4 overflow-x-auto pb-2 h-full'}`}
+            style={selectedCategory ? { gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))` } : {}}
           >
             {categories.map((category) => (
               <Card
@@ -125,22 +125,24 @@ const ChatInterface = () => {
                 onClick={() => handleCategoryClick(category)}
                 className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale ${
                   selectedCategory === category ? 'opacity-50' : ''
-                }`}
+                } ${selectedCategory ? '' : 'min-w-[180px] h-full'}`}
               >
                 <div 
                   className="absolute inset-0 bg-primary/10 transition-all duration-500"
                   style={{ height: `${categoryProgress[category]}%`, bottom: 0, top: 'auto' }}
                 />
-                <div className="relative h-full flex flex-col items-center justify-center p-4">
-                  <p className="text-base font-bold text-center">{category}</p>
+                <div className={`relative h-full flex flex-col items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
+                  <p className={`font-bold text-center ${selectedCategory ? 'text-base' : 'text-lg'} break-words max-w-full px-2`}>
+                    {category}
+                  </p>
                 </div>
               </Card>
             ))}
             
             {/* Add Category Button */}
             {isAddingCategory ? (
-              <Card className="relative overflow-hidden transition-all animate-scale-in">
-                <div className="h-full flex items-center justify-center p-4">
+              <Card className={`relative overflow-hidden transition-all animate-scale-in ${selectedCategory ? '' : 'min-w-[180px] h-full'}`}>
+                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
                   <Input
                     autoFocus
                     value={newCategoryName}
@@ -155,9 +157,9 @@ const ChatInterface = () => {
             ) : (
               <Card
                 onClick={() => setIsAddingCategory(true)}
-                className="relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20"
+                className={`relative overflow-hidden cursor-pointer transition-all hover:border-primary/50 hover-scale bg-muted/20 ${selectedCategory ? '' : 'min-w-[180px] h-full'}`}
               >
-                <div className="h-full flex items-center justify-center p-4">
+                <div className={`h-full flex items-center justify-center ${selectedCategory ? 'p-4' : 'p-6'}`}>
                   <span className="text-3xl font-light text-muted-foreground">+</span>
                 </div>
               </Card>
