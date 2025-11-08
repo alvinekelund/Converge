@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check, Briefcase } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const TalentDashboard = () => {
   const navigate = useNavigate();
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white flex">
@@ -101,12 +104,49 @@ const TalentDashboard = () => {
                         Accept
                       </Button>
                     </div>
-                    <Button 
-                      className="text-black text-sm h-9 w-full"
-                      style={{ backgroundColor: '#E8E8E8' }}
-                    >
-                      Details
-                    </Button>
+                    <Dialog open={isDetailsOpen} onOpenChange={setIsDetailsOpen}>
+                      <DialogTrigger asChild>
+                        <Button 
+                          className="text-black text-sm h-9 w-full hover:opacity-80"
+                          style={{ backgroundColor: '#E8E8E8' }}
+                        >
+                          Details
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent 
+                        className="max-w-none w-[70%] h-[70vh] p-0 border-0 overflow-hidden [&>button]:text-foreground"
+                        style={{ backgroundColor: '#edebe5' }}
+                      >
+                        <div className="relative h-full overflow-hidden">
+                          <div className="h-full overflow-y-auto px-8 py-6 scrollbar-hide">
+                            <div className="space-y-6 pb-20">
+                              <div>
+                                <h3 className="font-semibold font-serif text-lg mb-2 text-foreground">Invitation Type</h3>
+                                <p className="text-foreground/80">Mathematical Assessment</p>
+                              </div>
+                              
+                              <div>
+                                <h3 className="font-semibold font-serif text-lg mb-2 text-foreground">About the Team</h3>
+                                <p className="text-foreground/80">Our research division is a world-class group of engineers and scientists dedicated to solving the most complex challenges in artificial intelligence.</p>
+                              </div>
+                              
+                              <div>
+                                <h3 className="font-semibold font-serif text-lg mb-2 text-foreground">About the Role</h3>
+                                <p className="text-foreground/80">This position is at the core of our R&D efforts. You will be exploring novel techniques and contributing to foundational models that power our next generation of products.</p>
+                              </div>
+                              
+                              <div>
+                                <h3 className="font-semibold font-serif text-lg mb-2 text-foreground">In This Role, You Will:</h3>
+                                <p className="text-foreground/80">Implement and test new algorithms, collaborate with senior researchers on paper submissions, analyze large-scale datasets, and push the boundaries of what's possible...</p>
+                              </div>
+                            </div>
+                          </div>
+                          {/* Fade overlay at bottom */}
+                          <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" 
+                               style={{ background: 'linear-gradient(to bottom, transparent, #edebe5)' }} />
+                        </div>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </CardContent>
