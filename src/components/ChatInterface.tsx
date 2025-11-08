@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Paperclip, Mic, Send } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 interface Message {
   role: "agent" | "user";
@@ -13,6 +14,7 @@ interface Message {
 type Category = string;
 
 const ChatInterface = () => {
+  const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "agent",
@@ -243,6 +245,13 @@ const ChatInterface = () => {
                 className="h-12 w-12 rounded-full"
               >
                 <Send className="h-5 w-5" />
+              </Button>
+              <Button
+                onClick={() => navigate("/talent-dashboard")}
+                className="h-12 px-6 rounded-full text-black font-medium hover:opacity-90"
+                style={{ backgroundColor: "#cde75e" }}
+              >
+                Start recruiting
               </Button>
             </div>
           </div>
